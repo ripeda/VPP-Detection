@@ -13,13 +13,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
 
       - name: Build VPP Detect (Obj-C)
-        run: clang -arch x86_64 -arch arm64 -framework Foundation -o vpp-detect vpp-detect.m
+        run: python3 pkg.py
 
       - name: Compress Packages
         run: |
           ditto -c -k --sequesterRsrc --keepParent 'vpp-detect' 'VPP Detection (Obj-C).zip'
+          ditto -c -k --sequesterRsrc --keepParent 'Packages/Install-VPP-Detect.pkg' 'VPP Detection (Obj-C).pkg.zip'
+          ditto -c -k --sequesterRsrc --keepParent 'Packages/Uninstall-VPP-Detect.pkg' 'VPP Detection Uninstall (Obj-C).pkg.zip'
           ditto -c -k --sequesterRsrc --keepParent 'vpp-detect.sh' 'VPP Detection (ZSH).zip'
 
       - name: Upload VPP Detect (Obj-C) (artifact)
@@ -33,6 +39,18 @@ jobs:
         with:
             name: VPP Detection (ZSH) (artifact)
             path: VPP Detection (ZSH).zip
+
+      - name: Upload VPP Detection (Obj-C) (pkg) (artifact)
+        uses: actions/upload-artifact@v2
+        with:
+            name: VPP Detection (Obj-C) (pkg) (artifact)
+            path: VPP Detection (Obj-C).pkg.zip
+
+      - name: Upload VPP Detection Uninstall (Obj-C) (pkg) (artifact)
+        uses: actions/upload-artifact@v2
+        with:
+            name: VPP Detection Uninstall (Obj-C) (pkg) (artifact)
+            path: VPP Detection Uninstall (Obj-C).pkg.zip
 
       - name: Upload VPP Detect (Obj-C) (on release)
         if: github.event_name == 'release'
@@ -49,5 +67,24 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: VPP Detection (ZSH).zip
+          tag: ${{ github.ref }}
+          file_glob: true
+
+
+      - name: Upload VPP Detection (Obj-C) (pkg) (on release)
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: VPP Detection (Obj-C).pkg.zip
+          tag: ${{ github.ref }}
+          file_glob: true
+
+      - name: Upload VPP Detection Uninstall (Obj-C) (pkg) (on release)
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: VPP Detection Uninstall (Obj-C).pkg.zip
           tag: ${{ github.ref }}
           file_glob: true

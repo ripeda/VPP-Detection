@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+# Setup new install
+vpp_detect="vpp-detect"
+vpp_path="/usr/local/bin/$vpp_detect"
+
+if [[ ! -f "$vpp_path" ]]; then
+    echo "ERROR: $vpp_detect not found"
+    exit 1
+fi
+
+chmod a+x "$vpp_path"
