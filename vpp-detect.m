@@ -1,8 +1,20 @@
 /*
     Simple application to detect if the provided app bundle is a VPP-disributed app.
+    - Written by: Mykola Grymalyuk
+    - Company: RIPEDA Consulting
 
-    Compile with:
-        clang -framework Foundation -o vpp-detect vpp-detect.m
+    Compile:
+        clang -arch x86_64 -arch arm64 -framework Foundation -o vpp-detect vpp-detect.m
+
+    Usage:
+        ./vpp-detect <path to app bundle>
+
+    Return codes:
+        - 0: VPP
+        - 1: App Store (user-purchased)
+        - 2: OS Application (came with machine or downloded outside of App Store)
+        - 3: No App Store receipt found
+        - 4: Catch-all for any other errors
 */
 
 #import <Foundation/Foundation.h>

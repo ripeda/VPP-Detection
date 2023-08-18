@@ -28,6 +28,14 @@ TEST_SUITE: dict = {
             "Numbers.app",
         },
     },
+    "./Test Suite/iLife (VPP)": {
+        "Expected": RETURN_CODES["VPP"],
+        "Apps": {
+            "Pages.app",
+            "Keynote.app",
+            "Numbers.app",
+        },
+    },
 }
 
 CLI_PATH:    str = "./vpp-detect"
@@ -49,7 +57,13 @@ class Validate:
             raise Exception("Script not found")
 
         print("vpp-detect not found, compiling...")
-        result = subprocess.run(["clang", "-framework", "Foundation", "-o", "vpp-detect", "vpp-detect.m"], capture_output=True)
+        result = subprocess.run([
+            "clang",
+             "-framework", "Foundation",
+             "-arch", "x86_64",
+             "-arch", "arm64",
+             "-o", "vpp-detect", "vpp-detect.m",
+        ], capture_output=True)
         if result.returncode != 0:
             print("Failed to compile vpp-detect")
             print(result.stdout)
@@ -75,7 +89,7 @@ if __name__ == "__main__":
                 if return_code == TEST_SUITE[suite]["Expected"]:
                     print(f"      PASS: {app} in {suite}")
                 else:
-                    print(f"FAIL: {app} in {suite}")
-                    print(f"Expected: {TEST_SUITE[suite]['Expected']}")
-                    print(f"Received: {return_code}")
+                    print(f"      FAIL: {app} in {suite}")
+                    print(f"      Expected: {TEST_SUITE[suite]['Expected']}")
+                    print(f"      Received: {return_code}")
                     exit(1)

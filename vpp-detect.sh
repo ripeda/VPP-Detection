@@ -39,13 +39,13 @@ verificationURL="https://buy.itunes.apple.com/verifyReceipt"
 # MARK: - Functions
 # -----------------
 
-# Contructs the JSON for the receipt
+# Constructs the JSON for the receipt
 __constructJSON() {
 
     local receiptData
 
     # Get the receipt data
-    receiptData=$(base64 --input "$applicationReceipt")
+    receiptData=$(base64 -i "$applicationReceipt")
 
     # Construct the JSON
     echo "{\"receipt-data\":\"$receiptData\"}"
@@ -80,18 +80,18 @@ __checkServer() {
     fi
 
     # Check for 'receipt_type' value
-    if [[ "$receiptResponse" =~ "Production" ]]; then
-        echo "App Store"
-        exit 1
-    elif [[ "$receiptResponse" =~ "ProductionSandbox" ]]; then
-        echo "App Store"
-        exit 1
+    if [[ "$receiptResponse" =~ "ProductionVPPSandbox" ]]; then
+        echo "VPP"
+        exit 0
     elif [[ "$receiptResponse" =~ "ProductionVPP" ]]; then
         echo "VPP"
         exit 0
-    elif [[ "$receiptResponse" =~ "ProductionVPPSandbox" ]]; then
-        echo "VPP"
-        exit 0
+    elif [[ "$receiptResponse" =~ "ProductionSandbox" ]]; then
+        echo "App Store"
+        exit 1
+    elif [[ "$receiptResponse" =~ "Production" ]]; then
+        echo "App Store"
+        exit 1
     else
         echo "Not assigned to VPP or App Store"
         exit 2
