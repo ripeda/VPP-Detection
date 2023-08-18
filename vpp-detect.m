@@ -106,11 +106,7 @@ int isVPPApp(NSString *path)
     } else if ([receiptType isEqualToString:@"Production"] || [receiptType isEqualToString:@"ProductionSandbox"]) {
         printf("Applicaton is App Store\n");
         return APP_STORE;
-    } else {
-        printf("Applicaton is likely OS application or distribution outside of App Store\n");
-        return OS_APPLICATION;
     }
-
 
     printf("Unknown reciept type! Please report this issue\n");
     return CATCH_ALL;
