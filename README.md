@@ -3,6 +3,7 @@ Utility for detecting whether an application was distributed as VPP, user downlo
 
 * Offered either in Objective-C CLI application or ZSH script depending on your needs.
   * If unsure, Objective-C CLI application is recommended.
+* Requires network access to Apple's servers.
 
 ----------
 
