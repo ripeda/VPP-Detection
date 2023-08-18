@@ -40,33 +40,16 @@ version="1.0.0"
 # MARK: - Functions
 # -----------------
 
-# Constructs the JSON for the receipt
-__constructJSON() {
-
-    local receiptData
-
-    # Get the receipt data
-    receiptData=$(base64 -i "$applicationReceipt")
-
-    # Construct the JSON
-    echo "{\"receipt-data\":\"$receiptData\"}"
-
-}
-
-# Call server to verify receipt
+# Call server to determine receipt type
+# Takes applicationReceipt as an argument
 __checkServer() {
 
     local receiptJSON
+    local receiptData
     local receiptResponse
 
-    receiptJSON=$(__constructJSON)
+    receiptJSON="{\"receipt-data\":\"$(base64 -i "$1")\"}"
     receiptResponse=$(curl -s -X POST --data "$receiptJSON" "$verificationURL")
-
-    # echo "$receiptResponse"
-
-    # Response will be in json format
-    # Check for 'receipt' key, then 'receipt_type'
-
 
     # Check if receipt key is missing
     if [[ ! "$receiptResponse" =~ "receipt" ]]; then
@@ -93,11 +76,10 @@ __checkServer() {
     elif [[ "$receiptResponse" =~ "Production" ]]; then
         echo "App Store"
         exit 1
-    else
-        echo "Not assigned to VPP or App Store"
-        exit 2
     fi
 
+    echo "Unknown reciept type! Please report this issue"
+    exit 4
 }
 
 
@@ -123,5 +105,4 @@ if [[ ! -e "$applicationReceipt" ]]; then
 fi
 
 # Kick off the process
-__checkServer
-
+__checkServer "$applicationReceipt"
