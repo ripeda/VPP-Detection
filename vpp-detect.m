@@ -1,5 +1,5 @@
 /*
-    Simple application to detect if the provided app bundle is a VPP-disributed app.
+    Simple application to detect if the provided app bundle is a VPP-distributed app.
     - Written by: Mykola Grymalyuk
     - Company: RIPEDA Consulting
 
@@ -111,7 +111,9 @@ int isVPPApp(NSString *path)
         return OS_APPLICATION;
     }
 
-    return 0;
+
+    printf("Unknown reciept type! Please report this issue\n");
+    return CATCH_ALL;
 }
 
 
