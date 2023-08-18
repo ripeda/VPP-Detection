@@ -31,25 +31,25 @@ jobs:
       - name: Upload VPP Detect (Obj-C) (artifact)
         uses: actions/upload-artifact@v2
         with:
-            name: VPP Detection (Obj-C) (artifact)
+            name: VPP Detection (Obj-C)
             path: VPP Detection (Obj-C).zip
 
       - name: Upload VPP Detect (ZSH) (artifact)
         uses: actions/upload-artifact@v2
         with:
-            name: VPP Detection (ZSH) (artifact)
+            name: VPP Detection (ZSH)
             path: VPP Detection (ZSH).zip
 
       - name: Upload VPP Detection (Obj-C) (pkg) (artifact)
         uses: actions/upload-artifact@v2
         with:
-            name: VPP Detection (Obj-C) (pkg) (artifact)
+            name: VPP Detection (Obj-C) (pkg)
             path: VPP Detection (Obj-C).pkg.zip
 
       - name: Upload VPP Detection Uninstall (Obj-C) (pkg) (artifact)
         uses: actions/upload-artifact@v2
         with:
-            name: VPP Detection Uninstall (Obj-C) (pkg) (artifact)
+            name: VPP Detection Uninstall (Obj-C) (pkg)
             path: VPP Detection Uninstall (Obj-C).pkg.zip
 
       - name: Upload VPP Detect (Obj-C) (on release)
