@@ -29,6 +29,8 @@ typedef enum {
     CATCH_ALL = 4
 } ReturnCode;
 
+
+#define VERSION "1.0.0"
 #define VERIFCATION_URL "https://buy.itunes.apple.com/verifyReceipt"
 
 
@@ -120,6 +122,12 @@ int main(int argc, const char * argv[])
             printf("Usage: %s <path to app bundle>\n", argv[0]);
             return CATCH_ALL;
         }
+
+        if (strcmp(argv[1], "--version") == 0) {
+            printf("%s\n", VERSION);
+            return 0;
+        }
+
         NSString *path = [NSString stringWithUTF8String:argv[1]];
         int result = isVPPApp(path);
         printf("Result: %d\n", result);

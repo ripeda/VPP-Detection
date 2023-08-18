@@ -34,6 +34,7 @@
 application="$1"
 applicationReceipt="$application/Contents/_MASReceipt/receipt"
 verificationURL="https://buy.itunes.apple.com/verifyReceipt"
+version="1.0.0"
 
 
 # MARK: - Functions
@@ -102,6 +103,12 @@ __checkServer() {
 
 # MARK: - Main
 # ------------
+
+# Check if --version flag was passed
+if [[ "$1" == "--version" ]]; then
+    echo "$version"
+    exit 0
+fi
 
 # Check if the application exists
 if [[ ! -e "$application" ]]; then
