@@ -1,9 +1,12 @@
 # VPP-Detection
-Objective-C based utility for detecting whether an application was distributed as VPP, user downloaded from the App Store or neither.
+Utility for detecting whether an application was distributed as VPP, user downloaded from the App Store or neither.
+
+* Offered either in Objective-C CLI application or ZSH script depending on your needs.
+  * If unsure, Objective-C CLI application is recommended.
 
 ----------
 
-Compile:
+Compile (if using Objective-C CLI application):
 ```
 clang -framework Foundation -o vpp-detect vpp-detect.m
 ```
