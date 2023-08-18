@@ -1,0 +1,21 @@
+name: CI - Validation
+
+on:
+  push:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Validate
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Validate
+        run: python3 validate.py

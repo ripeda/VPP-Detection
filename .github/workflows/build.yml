@@ -1,0 +1,53 @@
+name: CI - Build
+
+on:
+  push:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build VPP Detect (Obj-C)
+        run: clang -arch x86_64 -arch arm64 -framework Foundation -o vpp-detect vpp-detect.m
+
+      - name: Compress Packages
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent 'vpp-detect' 'VPP Detection (Obj-C).zip'
+          ditto -c -k --sequesterRsrc --keepParent 'vpp-detect.sh' 'VPP Detection (ZSH).zip'
+
+      - name: Upload VPP Detect (Obj-C) (artifact)
+        uses: actions/upload-artifact@v2
+        with:
+            name: VPP Detection (Obj-C) (artifact)
+            path: VPP Detection (Obj-C).zip
+
+      - name: Upload VPP Detect (ZSH) (artifact)
+        uses: actions/upload-artifact@v2
+        with:
+            name: VPP Detection (ZSH) (artifact)
+            path: VPP Detection (ZSH).zip
+
+      - name: Upload VPP Detect (Obj-C) (on release)
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: VPP Detection (Obj-C).zip
+          tag: ${{ github.ref }}
+          file_glob: true
+
+      - name: Upload VPP Detection (ZSH) (on release)
+        if: github.event_name == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: VPP Detection (ZSH).zip
+          tag: ${{ github.ref }}
+          file_glob: true
