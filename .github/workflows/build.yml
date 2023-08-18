@@ -24,8 +24,8 @@ jobs:
       - name: Compress Packages
         run: |
           ditto -c -k --sequesterRsrc --keepParent 'vpp-detect' 'VPP Detection (Obj-C).zip'
-          ditto -c -k --sequesterRsrc --keepParent 'Packages/Install-VPP-Detect.pkg' 'VPP Detection (Obj-C).pkg.zip'
-          ditto -c -k --sequesterRsrc --keepParent 'Packages/Uninstall-VPP-Detect.pkg' 'VPP Detection Uninstall (Obj-C).pkg.zip'
+          ditto -c -k --sequesterRsrc --keepParent 'Packaging/Install-VPP-Detect.pkg' 'VPP Detection (Obj-C).pkg.zip'
+          ditto -c -k --sequesterRsrc --keepParent 'Packaging/Uninstall-VPP-Detect.pkg' 'VPP Detection Uninstall (Obj-C).pkg.zip'
           ditto -c -k --sequesterRsrc --keepParent 'vpp-detect.sh' 'VPP Detection (ZSH).zip'
 
       - name: Upload VPP Detect (Obj-C) (artifact)
