@@ -1,5 +1,5 @@
 # VPP-Detection
-Utility for detecting whether an application was distributed as VPP, user downloaded from the App Store or neither.
+Utility for detecting whether an application was distributed as VPP, user downloaded from the App Store or neither. Based on Apple's App Store verification system: [Validating receipts with the App Store](https://developer.apple.com/documentation/appstorereceipts/validating_receipts_with_the_app_store?language=objc)
 
 * Offered either in Objective-C CLI application or ZSH script depending on your needs.
   * If unsure, Objective-C CLI application is recommended.
@@ -27,7 +27,7 @@ Application will return one of the following exit codes:
 
 ----------
 
-Return code 3, `Not assigned to VPP or App Store`, means that the application has a Mac App Store receipt however is not associated with VPP or an iCloud account. This is generally the case for applications that shipped with the OS, and will be assigned to an iCloud user after setup. Sample applications include:
+Return code 2, `Not assigned to VPP or App Store`, means that the application has a Mac App Store receipt however is not associated with VPP or an iCloud account. This is generally the case for applications that shipped with the OS, and will be assigned to an iCloud user after setup. Sample applications include:
 * GarageBand
 * iMovie
 * Keynote
