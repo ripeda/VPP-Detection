@@ -30,7 +30,7 @@ typedef enum {
 } ReturnCode;
 
 
-#define VERSION "1.0.0"
+#define VERSION "1.0.1"
 #define VERIFCATION_URL "https://buy.itunes.apple.com/verifyReceipt"
 
 
