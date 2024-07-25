@@ -121,7 +121,7 @@ int main(int argc, const char * argv[])
             return CATCH_ALL;
         }
 
-        if (strcmp(argv[1], "--version") == 0) {
+        if (argc == 2 && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0)) {
             printf("%s\n", VERSION);
             return 0;
         }

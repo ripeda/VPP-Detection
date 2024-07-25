@@ -87,7 +87,7 @@ __checkServer() {
 # ------------
 
 # Check if --version flag was passed
-if [[ "$1" == "--version" ]]; then
+if [[ "$1" == "--version" ]] || [[ "$1" == "-v" ]]; then
     echo "$version"
     exit 0
 fi

@@ -8,6 +8,8 @@
   - Utilizes mac-signing-buddy library for signing and notarization
 - Utilize full executable pathing in `vpp-detect.sh`
   - Avoids malformed pathing issues
+- Add `-v` argument to `vpp-detect`/`vpp-detect.sh`
+  - Shortened form of `--version`
 
 ## 1.0.0
 - Initial release
