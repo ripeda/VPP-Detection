@@ -18,6 +18,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Install Dependencies
+        run: pip3 install -r requirements.txt
+
       - name: Build VPP Detect (Obj-C)
         run: python3 pkg.py
 

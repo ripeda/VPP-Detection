@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh --no-rcs
 
 # Setup new install
 vpp_detect="vpp-detect"
@@ -9,4 +9,4 @@ if [[ ! -f "$vpp_path" ]]; then
     exit 1
 fi
 
-chmod a+x "$vpp_path"
+/bin/chmod a+x "$vpp_path"

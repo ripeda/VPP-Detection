@@ -1,9 +1,0 @@
-#!/bin/zsh
-
-# Remove old vpp-detect install if present
-vpp_detect="vpp-detect"
-vpp_path="/usr/local/bin/$vpp_detect"
-
-if [[ -f "$vpp_path" ]]; then
-    rm -f "$vpp_path"
-fi

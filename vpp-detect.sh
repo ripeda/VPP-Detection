@@ -34,7 +34,7 @@
 application="$1"
 applicationReceipt="$application/Contents/_MASReceipt/receipt"
 verificationURL="https://buy.itunes.apple.com/verifyReceipt"
-version="1.0.1"
+version="1.1.0"
 
 
 # MARK: - Functions
