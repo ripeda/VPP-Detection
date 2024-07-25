@@ -2,3 +2,6 @@
 /vpp-detect
 *.pkg
 /Packaging/Install
+/vpp-detect.zip
+/Packaging/Uninstall-VPP-Detect.pkg.zip
+/Packaging/Install-VPP-Detect.pkg.zip

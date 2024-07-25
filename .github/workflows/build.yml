@@ -11,8 +11,28 @@ jobs:
     name: Build
     runs-on: macos-latest
 
+    env:
+      ORG_MAC_IDENTITY: ${{ secrets.ORG_MAC_IDENTITY }}
+      # App Signing
+      ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_BASE64: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_BASE64 }}
+      ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_PASSWORD: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_PASSWORD }}
+      # PKG Signing
+      ORG_MAC_DEVELOPER_ID_INSTALLER_CERT_P12_BASE64: ${{ secrets.ORG_MAC_DEVELOPER_ID_INSTALLER_CERT_P12_BASE64 }}
+      ORG_MAC_DEVELOPER_ID_INSTALLER_CERT_P12_PASSWORD: ${{ secrets.ORG_MAC_DEVELOPER_ID_INSTALLER_CERT_P12_PASSWORD }}
+      # Notarization
+      ORG_MAC_NOTARIZATION_TEAM_ID: ${{ secrets.ORG_MAC_NOTARIZATION_TEAM_ID }}
+      ORG_MAC_NOTARIZATION_APPLE_ID: ${{ secrets.ORG_MAC_NOTARIZATION_APPLE_ID }}
+      ORG_MAC_NOTARIZATION_PASSWORD: ${{ secrets.ORG_MAC_NOTARIZATION_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v3
+
+      - name: Import Application Signing Certificate
+        uses: dhinakg/import-codesign-certs@master
+        with:
+          p12-file-base64: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_BASE64 }}
+          p12-password: ${{ secrets.ORG_MAC_DEVELOPER_ID_APPLICATION_CERT_P12_PASSWORD }}
+
       - name: Install Python
         uses: actions/setup-python@v2
         with:
@@ -22,7 +42,7 @@ jobs:
         run: pip3 install -r requirements.txt
 
       - name: Build VPP Detect (Obj-C)
-        run: python3 pkg.py
+        run: python3 pkg.py --app_signing_identity "${{ env.ORG_MAC_IDENTITY }}" --pkg_signing_identity "${{ env.ORG_MAC_IDENTITY }}" --notarize_team_id "${{ env.ORG_MAC_NOTARIZATION_TEAM_ID }}" --notarize_apple_id "${{ env.ORG_MAC_NOTARIZATION_APPLE_ID }}" --notarize_password "${{ env.ORG_MAC_NOTARIZATION_PASSWORD }}"
 
       - name: Compress Packages
         run: |

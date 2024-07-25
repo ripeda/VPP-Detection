@@ -48,8 +48,8 @@ __checkServer() {
     local receiptData
     local receiptResponse
 
-    receiptJSON="{\"receipt-data\":\"$(base64 -i "$1")\"}"
-    receiptResponse=$(curl -s -X POST --data "$receiptJSON" "$verificationURL")
+    receiptJSON="{\"receipt-data\":\"$(/usr/bin/base64 -i "$1")\"}"
+    receiptResponse=$(/usr/bin/curl -s -X POST --data "$receiptJSON" "$verificationURL")
 
     # Check if receipt key is missing
     if [[ ! "$receiptResponse" =~ "receipt" ]]; then
