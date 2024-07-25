@@ -10,6 +10,8 @@
   - Avoids malformed pathing issues
 - Add `-v` argument to `vpp-detect`/`vpp-detect.sh`
   - Shortened form of `--version`
+- Add `--no-rcs` to all ZSH scripts
+  - Avoids loading external settings
 
 ## 1.0.0
 - Initial release
